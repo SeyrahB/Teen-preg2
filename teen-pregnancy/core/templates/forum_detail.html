@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.title }} - Forum Post{% endblock %}
+
+{% block content %}
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.content }}</p>
+    <p><strong>Posted by:</strong> {{ post.author }} | <strong>Posted on:</strong> {{ post.created_at }}</p>
+    <a href="{% url 'forum' %}">Back to Forum</a>
+{% endblock %}

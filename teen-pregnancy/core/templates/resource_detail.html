@@ -1,0 +1,16 @@
+{% block title %}Resources - Teen Pregnancy Support{% endblock %}
+
+{% block content %}
+    <h2>Available Resources</h2>
+    <div class="row">
+        {% for resource in resources %}
+            <div class="col-md-4">
+                <div class="resource-card">
+                    <h3>{{ resource.title }}</h3>
+                    <p>{{ resource.description|truncatewords:15 }}</p>
+                    <a href="{% url 'resource_detail' resource.id %}">Learn More</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

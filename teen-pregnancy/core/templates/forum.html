@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Forum - Teen Pregnancy Support{% endblock %}
+
+{% block content %}
+    <h1>Forum</h1>
+    <div class="row">
+        {% for post in forum_posts %}
+            <div class="col-md-4">
+                <div class="forum-post">
+                    <h3>{{ post.title }}</h3>
+                    <p>{{ post.content|truncatewords:20 }}</p>
+                    <a href="{% url 'forum_detail' post.id %}">Read More</a>
+                </div>
+            </div>
+        {% empty %}
+            <p>No forum posts available at the moment.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

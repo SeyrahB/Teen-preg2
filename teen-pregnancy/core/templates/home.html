@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Teen Pregnancy Support{% endblock %}
+
+{% block content %}
+<div class="hero-section text-center p-5">
+    <h1>Welcome to Teen Pregnancy Support</h1>
+    <p>Get the help, resources, and support you need to navigate teen pregnancy.</p>
+
+    <!-- Search Form -->
+    <form action="{% url 'search' %}" method="get">
+        <input type="text" name="q" placeholder="Search for resources or forum posts" value="{{ request.GET.q }}">
+        <button type="submit">Search</button>
+    </form>
+</div>
+{% if user.is_authenticated %}
+<p>Hello, {{ user.username }}!</p>
+<a href="{% url 'logout' %}">Logout</a>
+{% else %}
+<a href="{% url 'login' %}">Login</a>
+<a href="{% url 'signup' %}">Sign Up</a>
+{% endif %}
+
+<h2 class="text-center my-4">Recent Forum Posts</h2>
+<div class="container">
+    <div class="row">
+        {% for post in forum_posts %}
+        <div class="col-md-4">
+            <div class="forum-post card mb-4">
+                <h3 class="card-header">{{ post.title }}</h3>
+                <p class="card-body">{{ post.content|truncatewords:20 }}</p>
+                <a href="{% url 'forum_detail' post.id %}" class="btn btn-primary">Read More</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
